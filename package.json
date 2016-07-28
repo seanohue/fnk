@@ -5,7 +5,8 @@
   "main": "fnk.js",
   "dependencies": {},
   "devDependencies": {
-    "traceur": "0.0.111",
+    "babel-cli": "^6.11.4",
+    "babel-preset-es2015": "^6.9.0",
     "uglify-js": "^2.7.0"
   },
   "scripts": {
