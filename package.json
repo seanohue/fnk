@@ -12,7 +12,7 @@
     "test": "npm test",
     "build": "npm run-script build:dist && npm run-script build:minify",
     "build:dist": "traceur --out dist/fnk.js --script fnk.js",
-    "build:minify": "uglifyjs dist/fnk.js --source-map dist/fnk.map.js -o dist/fnk.min.js"
+    "build:minify": "uglifyjs dist/fnk.js --source-map dist/fnk.map.js -o dist/fnk.min.js --compress --mangle -v --sequences --conditionals --comparisons --booleans --join_vars"
   },
   "repository": {
     "type": "git",
