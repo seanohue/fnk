@@ -1,0 +1,29 @@
+{
+  "name": "fnk",
+  "version": "0.0.1",
+  "description": "buncha functions and stuff",
+  "main": "fnk.js",
+  "dependencies": {},
+  "devDependencies": {
+    "traceur": "0.0.111"
+  },
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seanohue/fnk.git"
+  },
+  "keywords": [
+    "functional",
+    "es6",
+    "helpers",
+    "utility"
+  ],
+  "author": "Sean O'Donohue",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/seanohue/fnk/issues"
+  },
+  "homepage": "https://github.com/seanohue/fnk#readme"
+}
