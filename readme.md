@@ -4,4 +4,6 @@ Taken from a handful of utility functions I found myself using all over the plac
 
 Use cases:
 
-```//TODO```
+```javascript
+//TODO
+```
