@@ -5,11 +5,14 @@
   "main": "fnk.js",
   "dependencies": {},
   "devDependencies": {
-    "traceur": "0.0.111"
+    "traceur": "0.0.111",
+    "uglify-js": "^2.7.0"
   },
   "scripts": {
     "test": "npm test",
-    "build": "traceur --out dist/fnk.js --script fnk.js"
+    "build": "npm run-script build:dist && npm run-script build:minify",
+    "build:dist": "traceur --out dist/fnk.js --script fnk.js",
+    "build:minify": "uglifyjs dist/fnk.js --source-map dist/fnk.map.js -o dist/fnk.min.js"
   },
   "repository": {
     "type": "git",
