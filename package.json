@@ -8,7 +8,8 @@
     "traceur": "0.0.111"
   },
   "scripts": {
-    "test": "npm test"
+    "test": "npm test",
+    "build": "traceur --out dist/fnk.js --script fnk.js"
   },
   "repository": {
     "type": "git",
