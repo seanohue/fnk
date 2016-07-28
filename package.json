@@ -1,6 +1,6 @@
 {
   "name": "fnk",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "buncha functions and stuff",
   "main": "fnk.js",
   "dependencies": {},
