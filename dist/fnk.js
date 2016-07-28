@@ -106,5 +106,9 @@ module.exports = {
   is: is,
   cache: cache,
   arrayDiff: arrayDiff,
-  createIterator: createIterator
+  maybeMap: maybeMap,
+  maybeSort: maybeSort,
+  createIterator: createIterator,
+  maybeIterableWrapper: maybeIterableWrapper,
+  maybeForEach: maybeForEach
 };
