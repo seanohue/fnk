@@ -1,5 +1,10 @@
 'use strict';
 
+/*
+ * Takes two arrays, returns an array with any elements that the arrays do not share.
+ */
+const arrayDiff = (a, b) => a.filter(x => b.indexOf(x) === -1);
+
 /**
  * Returns an iterator function to run fn on x a specified number of times.
  * @param function
@@ -15,6 +20,27 @@ const createIterator = (fn, times) => x => {
   }
   return result;
 };
+
+/**
+ * A memoizer using ES6 maps
+ * @param  function to be memoized
+ * @return function to take variable args, and utilize the cache.
+ */
+
+const cache = (func) => {
+  const cache = new Map();
+
+  return (...args) => {
+    const key = [...args]
+      .map(JSON.stringify)
+      .join(',');
+
+    return cache.has(key) ?
+           cache.get(key) :
+           cache.set(key, func(...args))
+                .get(key);
+    }
+}
 
 /**
  * Fills an array of size n with value v
@@ -114,10 +140,11 @@ const setBounds = (min, max) => n =>
 
 module.exports = {
   fillArray, compose,
-  createIterator,
   has,       hasNot,
   firstWord, splitArgs,
   hasKeys,   leftPad,
   values,    reduceValues,
-  setBounds, is
+  setBounds, is,
+  cache,     arrayDiff,
+  createIterator
 };
