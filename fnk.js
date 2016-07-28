@@ -5,6 +5,22 @@
  */
 const arrayDiff = (a, b) => a.filter(x => b.indexOf(x) === -1);
 
+/*
+  Takes a higher order func as a string, returns a func that takes a thing
+  (The thing may be an array), and a functor, then applies the functor either
+  as a regular function (if the thing is not an array-like)
+  or applies it to the iterable using the wrapped higher order function.
+
+  Example:
+  maybeMap([1, 2, 3], double); // [2, 4, 6]
+  maybeMap(37, double); // 74
+
+  */
+const maybeIterableWrapper = higherOrderFunc => (thing, fn) => Array.isArray ? thing[higherOrderFunc](fn) : fn(thing);
+const maybeForEach = maybeIterableWrapper('forEach');
+const maybeSort    = maybeIterableWrapper('sort');
+const maybeMap     = maybeIterableWrapper('map');
+
 /**
  * Returns an iterator function to run fn on x a specified number of times.
  * @param function
@@ -146,5 +162,8 @@ module.exports = {
   values,    reduceValues,
   setBounds, is,
   cache,     arrayDiff,
-  createIterator
+  maybeMap,  maybeSort,
+  createIterator,
+  maybeIterableWrapper,
+  maybeForEach,
 };

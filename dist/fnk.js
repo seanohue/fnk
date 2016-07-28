@@ -4,6 +4,14 @@ var arrayDiff = function(a, b) {
     return b.indexOf(x) === -1;
   });
 };
+var maybeIterableWrapper = function(higherOrderFunc) {
+  return function(thing, fn) {
+    return Array.isArray ? thing[higherOrderFunc](fn) : fn(thing);
+  };
+};
+var maybeForEach = maybeIterableWrapper('forEach');
+var maybeSort = maybeIterableWrapper('sort');
+var maybeMap = maybeIterableWrapper('map');
 var createIterator = function(fn, times) {
   return function(x) {
     var result = fn(x);
