@@ -88,6 +88,15 @@ const firstWord = args => splitArgs(args)[0];
 const splitArgs = args => args.toLowerCase().split(' ');
 
 /**
+ * Function composition with variable arity (lol jargon)
+ * @param(s) any number of functions
+ * @return  a function that will take all of the functions, then you can pass a single arg to it.
+ */
+
+const compose = (...fns) =>
+  fns.reduce( (f, g) => (a) => f( g( a) ), id);
+
+/**
  * Allows you to set min and max range for a number.
  * Mostly for preventing semi-random results from getting wacky.
  * Usage:
@@ -104,6 +113,7 @@ const setBounds = (min, max) => n =>
   Math.max(Math.min(max, stat), min);
 
 module.exports = {
+  fillArray, compose,
   createIterator,
   has,       hasNot,
   firstWord, splitArgs,
