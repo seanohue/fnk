@@ -128,7 +128,7 @@ const compose = (...fns) =>
  * Usage:
  * // Returns a number guaranteed to be between 0 and 100 inclusive but probably tending toward 100.
  * const arbitraryWithinBounds = setBounds(0, 100);
- * const arbitrarySmallNumber = arbitraryWithinBounds(Math.random() * 1000);
+ * const arbitrarySmallNumber  = arbitraryWithinBounds(Math.random() * 1000);
  * @param Number minimum bound
  * @param Number maximum bound
  * @return Function boundsChecker
