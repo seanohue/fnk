@@ -1,5 +1,22 @@
 'use strict';
 
+/**
+ * Returns an iterator function to run fn on x a specified number of times.
+ * @param function
+ * @param number of times to iterate over the function
+ * @return x value to pass into fn, then the function iterates over its own result
+ */
+
+const createIterator = (fn, times) => x => {
+  let result = fn(x);
+  let i = times - 1;
+  while (i) {
+    i--;
+    result = fn(result);
+  }
+  return result;
+};
+
 /*
  * Takes an array or string and a thing and tells you if the thing is in the array or string.
  */
@@ -78,6 +95,7 @@ const setBounds = (min, max) => n =>
   Math.max(Math.min(max, stat), min);
 
 module.exports = {
+  createIterator,
   has,       hasNot,
   firstWord, splitArgs,
   hasKeys,   leftPad,
