@@ -12,26 +12,6 @@ var arrayDiff = function arrayDiff(a, b) {
   });
 };
 
-/*
-  Takes a higher order func as a string, returns a func that takes a thing
-  (The thing may be an array), and a functor, then applies the functor either
-  as a regular function (if the thing is not an array-like)
-  or applies it to the iterable using the wrapped higher order function.
-
-  Example:
-  maybeMap([1, 2, 3], double); // [2, 4, 6]
-  maybeMap(37, double); // 74
-
-  */
-var maybeIterableWrapper = function maybeIterableWrapper(higherOrderFunc) {
-  return function (thing, fn) {
-    return Array.isArray ? thing[higherOrderFunc](fn) : fn(thing);
-  };
-};
-var maybeForEach = maybeIterableWrapper('forEach');
-var maybeSort = maybeIterableWrapper('sort');
-var maybeMap = maybeIterableWrapper('map');
-
 /**
  * Returns an iterator function to run fn on x a specified number of times.
  * @param function
@@ -71,7 +51,7 @@ var cache = function cache(func) {
 };
 
 /**
- * Fills an array of size n with value v
+ * Creates an array of size n filled with value v
  * @param number n of items to go into the array
  * @param value v of item to fill array with
  * @return an array of size n with value v
@@ -99,6 +79,10 @@ var hasNot = function hasNot(collection, thing) {
  * @return Array of values
  */
 var values = function values(obj) {
+  if (obj.values) {
+    return obj.values();
+  }
+
   var vals = [];
   for (var key in obj) {
     if (obj.hasOwnProperty(key)) {
@@ -109,7 +93,7 @@ var values = function values(obj) {
 };
 
 /**
- * Does the object have an array of keys?
+ * Does the object have any keys?
  */
 var hasKeys = function hasKeys(obj) {
   return !!Object.keys(obj).length;
@@ -195,6 +179,11 @@ var setBounds = function setBounds(min, max) {
   };
 };
 
+// Ensures that a specific value is an array, if the thing is already an array it won't create a nested array.
+var toArray = function toArray(value) {
+  return [].concat(value);
+};
+
 module.exports = {
   fillArray: fillArray, compose: compose,
   has: has, hasNot: hasNot,
@@ -203,10 +192,8 @@ module.exports = {
   values: values, reduceValues: reduceValues,
   setBounds: setBounds, is: is,
   cache: cache, arrayDiff: arrayDiff,
-  maybeMap: maybeMap, maybeSort: maybeSort,
   createIterator: createIterator,
-  maybeIterableWrapper: maybeIterableWrapper,
-  maybeForEach: maybeForEach
+  toArray: toArray
 };
 
 //# sourceMappingURL=fnk.js.map
