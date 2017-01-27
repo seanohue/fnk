@@ -5,22 +5,6 @@
  */
 const arrayDiff = (a, b) => a.filter(x => b.indexOf(x) === -1);
 
-/*
-  Takes a higher order func as a string, returns a func that takes a thing
-  (The thing may be an array), and a functor, then applies the functor either
-  as a regular function (if the thing is not an array-like)
-  or applies it to the iterable using the wrapped higher order function.
-
-  Example:
-  maybeMap([1, 2, 3], double); // [2, 4, 6]
-  maybeMap(37, double); // 74
-
-  */
-const maybeIterableWrapper = higherOrderFunc => (thing, fn) => Array.isArray ? thing[higherOrderFunc](fn) : fn(thing);
-const maybeForEach = maybeIterableWrapper('forEach');
-const maybeSort    = maybeIterableWrapper('sort');
-const maybeMap     = maybeIterableWrapper('map');
-
 /**
  * Returns an iterator function to run fn on x a specified number of times.
  * @param function
@@ -59,7 +43,7 @@ const cache = (func) => {
 }
 
 /**
- * Fills an array of size n with value v
+ * Creates an array of size n filled with value v
  * @param number n of items to go into the array
  * @param value v of item to fill array with
  * @return an array of size n with value v
@@ -80,6 +64,8 @@ const hasNot = (collection, thing) => !has(collection, thing);
  * @return Array of values
  */
 const values = obj => {
+  if (obj.values) { return obj.values(); }
+
   let vals = [];
   for (const key in obj) {
     if (obj.hasOwnProperty(key)){
@@ -90,7 +76,7 @@ const values = obj => {
 }
 
 /**
- * Does the object have an array of keys?
+ * Does the object have any keys?
  */
 const hasKeys = obj => !!Object.keys(obj).length;
 
@@ -154,16 +140,18 @@ const compose = (...fns) =>
 const setBounds = (min, max) => n =>
   Math.max(Math.min(max, stat), min);
 
+
+// Ensures that a specific value is an array, if the thing is already an array it won't create a nested array.
+const toArray = value => [].concat(value);
+
 module.exports = {
-  fillArray, compose,
+  fillArray,  compose,
   has,       hasNot,
-  firstWord, splitArgs,
+  firstWord,  splitArgs,
   hasKeys,   leftPad,
   values,    reduceValues,
   setBounds, is,
   cache,     arrayDiff,
-  maybeMap,  maybeSort,
   createIterator,
-  maybeIterableWrapper,
-  maybeForEach,
+  toArray
 };
