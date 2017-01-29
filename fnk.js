@@ -27,7 +27,7 @@ const createIterator = (fn, times) => x => {
  * @return function to take variable args, and utilize the cache.
  */
 
-const cache = (func) => {
+const cache = func => {
   const cache = new Map();
 
   return (...args) => {
@@ -83,13 +83,12 @@ const hasKeys = obj => !!Object.keys(obj).length;
 /**
  * Pads leftly.
  */
-const leftPad = (amt, pad) => {
-  pad = pad || '';
+const leftPad = (amt, str = '', pad = ' ') => {
   while (amt) {
-    pad += ' ';
+    str += ' ';
     amt--;
   }
-  return pad;
+  return str;
 }
 
 /*
@@ -103,18 +102,6 @@ const is = (typeclass, thing) => thing ? thing instanceof typeclass : false;
  */
 const reduceValues = (obj, callback, starter) => values(obj).reduce(callback, starter);
 
-/*
- * Gets the first word of a string.
- * For parsing command args.
- */
-const firstWord = args => splitArgs(args)[0];
-
-/*
- * Splits a string into an array of words.
- * For parsing command args.
- */
-const splitArgs = args => args.toLowerCase().split(' ');
-
 /**
  * Function composition with variable arity (lol jargon)
  * @param(s) any number of functions
@@ -122,7 +109,7 @@ const splitArgs = args => args.toLowerCase().split(' ');
  */
 
 const compose = (...fns) =>
-  fns.reduce( (f, g) => (a) => f( g( a) ), id);
+  fns.reduce( (f, g) => (...args) => f( g(...args) ), id);
 
 /**
  * Allows you to set min and max range for a number.
@@ -147,7 +134,6 @@ const toArray = value => [].concat(value);
 module.exports = {
   fillArray,  compose,
   has,       hasNot,
-  firstWord,  splitArgs,
   hasKeys,   leftPad,
   values,    reduceValues,
   setBounds, is,
