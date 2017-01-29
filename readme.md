@@ -64,7 +64,7 @@ doStupidMath(2) // 205
 _.leftPad(5, 'potatoes', '*') // '*****potatoes'
 
 // Nicer-looking typechecking
-const isPlayer = (thing) => is(Player);
+const isPlayer = (thing) => _.is(Player);
 isPlayer(potato) // false
 isPlayer(new Player()) // true
 
